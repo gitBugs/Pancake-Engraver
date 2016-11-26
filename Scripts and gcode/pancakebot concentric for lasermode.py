@@ -1,3 +1,4 @@
+
 #Preamble
 
 #Variables for configuration
@@ -19,7 +20,7 @@ import cv2
 import math 
 
 #Open file to receive gcode
-gcodeFile = open('EMF.gcode',mode='w')
+gcodeFile = open('smiley.gcode',mode='w')
 
 #Write initial gcode to the file
 gcodeLine2 = "g0 z0 f10000\n" #set laser to lowest (off) power
@@ -33,7 +34,7 @@ gcodeFile.write(gcodeLine4)
 
 
 #Open image
-inputImgBig = cv2.imread('EMF.png', 0)
+inputImgBig = cv2.imread('smiley.png', 0)
 
 
 inputImg = cv2.resize(inputImgBig,None,fx=.2, fy=.2, interpolation = cv2.INTER_CUBIC)
@@ -109,15 +110,15 @@ while currentAngle < maxAngle:
         F="4000"
         #gcodeLine2 = "G01 X" + str(turntableCentreDistanceFromEndstop + (int(numberOfCompletedCircles) * xmmPerRadiusUnit)) + " Y" + str(int(currentAngle * ymmPerRadian)) + "Z" + str(laserPower) + " F2000\n"
     gcodeLine2 = "G01 X" + X + " Y" + Y + " Z"+ Z + " F" + F + "\n"
-    if any ([X != previousX, Z != previousZ, F != previousF]):
-        gcodeFile.write(gcodeLine2)
-        previousX = X
+    #if any ([X != previousX, Z != previousZ, F != previousF]):
+    #    gcodeFile.write(gcodeLine2)
+    #    previousX = X
         #previousY = Y
-        previousZ = Z
-        previousF = F
+    #    previousZ = Z
+    #    previousF = F
     
         #gcodeFile.write(gcodeLine1)
-        gcodeFile.write(gcodeLine2) 
+    gcodeFile.write(gcodeLine2) 
     
     
 cv2.imshow('image',outputImg)
